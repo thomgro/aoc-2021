@@ -1,6 +1,37 @@
 import AOCUtils
 from AOCUtils.fileHandler import *
 
+def drawVentDiagonally(coordArray, start, end):
+    x1 = start[0]
+    y1 = start[1]
+    x2 = end[0]
+    y2 = end[1]
+    xsign = 0
+    ysign = 0
+    if x1 < x2:
+        xsign = 1
+    else:
+        xsign = -1
+    if y1 < y2:
+        ysign = 1
+    else:
+        ysign = -1
+    
+    xdistance = abs(x2 - x1)
+    ydistance = abs(y2 - y1)
+    if xdistance != ydistance:
+        print(start)
+        print(end)
+    xrunner = x1
+    yrunner = y1
+    while 1:
+        coordArray[xrunner][yrunner] += 1
+        xrunner += xsign
+        yrunner += ysign
+        if xrunner == x2:
+            coordArray[xrunner][yrunner] += 1
+            break
+
 def drawVent(coordArray, vent):
     start = vent[0].split(",")
     end = vent[1].split(",")
@@ -24,7 +55,7 @@ def drawVent(coordArray, vent):
                 runner -= 1
         else:
             "this should not happen"
-    if start[1] == end[1]:
+    elif start[1] == end[1]:
         runner = start[0]
         # run in positive direction
         if end[0] > start[0]:
@@ -40,6 +71,8 @@ def drawVent(coordArray, vent):
                 runner -= 1
         else:
             "this should not happen"
+    else:
+        drawVentDiagonally(coordArray, start, end)
 coordArray = []
 for i in range(1000):
     coordArray.append([])
@@ -60,4 +93,4 @@ for i in range(1000):
         if coordArray[i][j] > 1:
             counter += 1
             #print(coordArray[i][j])
-print("star 1: %i" % counter)
+print("star 2: %i" % counter)
