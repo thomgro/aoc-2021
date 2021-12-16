@@ -11,7 +11,8 @@ class CardEntry:
         self.marked = 0
 
 class BingoCard:
-    entries = []
+    def __init__(self):
+        self.entries = []
 
     def checkCompleteness(self, row, column):
         rowCount = 0
@@ -36,7 +37,7 @@ class BingoCard:
         columnFound = -1
         numberFound = 0
         for i in range (len(self.entries)):
-            if self.entries[i].number == number:
+            if int(self.entries[i].number) == int(number):
                 rowFound = self.entries[i].row
                 columnFound = self.entries[i].column
                 self.entries[i].marked = 1

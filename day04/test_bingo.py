@@ -64,9 +64,9 @@ def test_inputCards():
     cards = []
     i = 0
     newCard = BingoCard()
+    row = 1
+    column = 1
     for line in lines:
-        row = 1
-        column = 1
         if line:
             if i % 5 == 0 and i > 0:
                 cards.append(newCard)
