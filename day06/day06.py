@@ -18,25 +18,19 @@ maxListSize = 700000000
 
 fishes = openFileAsLineArray("input.txt")[0].split(",")
 fishes = [int(x) for x in fishes]
-listOfLists.append(fishes)
+
+population = [fishes.count(0), fishes.count(1), fishes.count(2), fishes.count(3), fishes.count(4), fishes.count(5), fishes.count(6), fishes.count(7), fishes.count(8)]
 
 for i in range(256):
-    for j in range(len(listOfLists)):
-        print(i)
-        print(len(listOfLists))
-        spawncount = listOfLists[j].count(0)
-        listOfLists[j] = [6 if x == 0 else x-1 for x in listOfLists[j]]
-        listOfLists[j].extend([8]*spawncount)
-        if len(listOfLists[j]) > maxListSize:
-            splitIndex = int(len(listOfLists)/2)
-            firstHalf = listOfLists[j][:splitIndex]
-            secondHalf = listOfLists[j][splitIndex:]
-            del listOfLists[j]
-            listOfLists.append(firstHalf)
-            listOfLists.append(secondHalf)
+    #print(population)
+    spawns = int(population[0])
+    for i in range(1,9):
+        population[i-1] = population[i]
+    population[6] += spawns
+    population[8] = spawns
 
 sum = 0
-for list in listOfLists:
-    sum += len(list)
+for i in range(len(population)):
+    sum += population[i]
 
-print("star2: %i" % sum)
+print("star 2: %i" % sum)
