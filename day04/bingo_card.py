@@ -1,18 +1,15 @@
 class CardEntry:
-    number = -1
-    row = -1
-    column = -1
-    marked = -1
 
-    def __init__(self, number, row, column):
+    def __init__(self, number, row, column, marked):
         self.number = number
         self.row = row
         self.column = column
-        self.marked = 0
+        self.marked = marked
 
 class BingoCard:
     def __init__(self):
         self.entries = []
+        self.won = 0
 
     def checkCompleteness(self, row, column):
         rowCount = 0
@@ -27,8 +24,8 @@ class BingoCard:
         else:
             return 0
 
-    def addEntry(self, number, row, column):
-        entry = CardEntry(int(number), row, column)
+    def addEntry(self, number, row, column, marked):
+        entry = CardEntry(int(number), row, column, marked)
         self.entries.append(entry)
         return 0
 
